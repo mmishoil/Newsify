@@ -1,1 +1,1 @@
-A web-app that pulls and displays news across the Inernet
+A web-app that pulls and displays news across the Internet
