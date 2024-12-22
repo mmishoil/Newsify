@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
 from .views import say_hello
+from .views import my_form_submit
 
 urlpatterns = [
-    path('hello/', say_hello),
+    path('', say_hello),
+    path('submit-form/', my_form_submit, name='submit_form'),
 ]
