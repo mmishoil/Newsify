@@ -12,6 +12,9 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: '3.12.8'
+    - name: Show Secret
+      run: |
+        echo "AWS_HOST is: $${AWS_HOST}"
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
