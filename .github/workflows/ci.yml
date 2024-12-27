@@ -13,7 +13,7 @@ jobs:
       with:
         python-version: '3.12.8'
     - name: Secret Example
-      run:
+      run: |
           echo "AWS_USERNAME: ${{ secrets.AWS_USERNAME }}"
     - name: Install Dependencies
       run: |
