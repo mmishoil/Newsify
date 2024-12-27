@@ -1,35 +1,33 @@
 console.log("init index.js")
 
-document.addEventListener("DOMContentLoaded", function() {
+const myFunction = function() {
     document.getElementById("myForm").addEventListener("submit", function(e) {
-        e.preventDefault(); // Предотвращаем стандартное поведение формы
+        e.preventDefault();
 
-        const formData = new FormData(this); // Собираем данные формы
+        const formData = new FormData(this);
 
-        fetch('/submit-form/', { // Путь к вашему представлению Django
+        fetch('/submit-form/', {
             method: 'POST',
             body: formData,
             headers: {
-                'X-Requested-With': 'XMLHttpRequest', // Для Django, чтобы распознать запрос как AJAX
-                'X-CSRFToken': getCookie('csrftoken'), // Получаем токен CSRF для защиты от атак
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken'),
             },
         })
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'ok'){
-                // Очистка контейнера, если в нем уже есть содержимое
+
                 const responseContainer = document.getElementById('formResponse');
                 responseContainer.innerHTML = '';
 
-                // Создание списка статей
                 const list = document.createElement('ul');
                 list.className = 'list-group'
                 data.articles.forEach(article => {
-                    // Для каждого объекта в массиве создаем элемент списка
+
                     const item = document.createElement('li');
                     item.className = 'list-group-item'
 
-                    // Наполнение элемента списка. Например, у каждого объекта есть 'title' и 'description'
                     item.innerHTML = `<strong>${article.title}</strong><br>
                           ${article.content}<br>
                           <em>${new Date(article.publishedAt).toLocaleString()}</em>`;
@@ -62,4 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         return cookieValue;
     }
-});
+}
+
+
+document.addEventListener("DOMContentLoaded", myFunction);
