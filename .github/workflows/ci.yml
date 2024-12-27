@@ -14,7 +14,7 @@ jobs:
         python-version: '3.12.8'
     - name: Secret Example
       run: |
-          echo "AWS_USERNAME: ${{ secrets.AWS_USERNAME }}"
+          echo "AWS_USERNAME: $AWS_USERNAME" >> debug_log.txt
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
