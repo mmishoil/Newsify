@@ -23,4 +23,4 @@ jobs:
           password: ${{ secrets.DEPLOY_KEY }}
           port: 22
           source: "."
-          target: "Project/"
+          target: "/Project/"
