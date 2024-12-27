@@ -3,21 +3,36 @@ name: Django CI/CD
 on:
   push:
     branches: [ master ]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: '3.12.8'
-    - name: Show Secret
+
+    - name: Show Secret (Debug Only)
+      env:
+        AWS_HOST: ${{ secrets.AWS_HOST }}
       run: |
-        echo "AWS_HOST is: $${secrets.AWS_HOST}"
+        echo "AWS_HOST is: $AWS_HOST"
+
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
+
+    - name: Test SSH Connection
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} "echo Connection successful"
+      env:
+        AWS_HOST: ${{ secrets.AWS_HOST }}
+        AWS_USERNAME: ${{ secrets.AWS_USERNAME }}
+
     - name: Deploy to AWS EC2
       uses: appleboy/scp-action@master
       with:
