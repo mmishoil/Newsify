@@ -22,8 +22,7 @@ jobs:
     - name: Install dependencies and restart server
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
-          cd /path/to/your/project
-          source venv/bin/activate
+          cd newsify
           pip install -r requirements.txt
-          sudo systemctl restart your-service.service
+          python3 manage.py runserver
         EOF
