@@ -18,12 +18,12 @@ jobs:
         SOURCE: "."
         REMOTE_HOST: ${{ secrets.AWS_HOST }}
         REMOTE_USER: ${{ secrets.AWS_USERNAME }}
-        TARGET: '_work'
-    - name: Install dependencies and restart server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
-          cd /path/to/your/project
-          source venv/bin/activate
-          pip install -r requirements.txt
-          sudo systemctl restart your-service.service
-        EOF
+        TARGET: 'actions-runner/_work/Newsify/'
+#    - name: Install dependencies and restart server
+#      run: |
+#        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
+#          cd /path/to/your/project
+#          source venv/bin/activate
+#          pip install -r requirements.txt
+#          sudo systemctl restart your-service.service
+#        EOF
