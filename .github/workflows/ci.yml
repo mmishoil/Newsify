@@ -9,7 +9,9 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
     - name: Copy project to AWS EC2
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
@@ -19,10 +21,12 @@ jobs:
         REMOTE_HOST: ${{ secrets.AWS_HOST }}
         REMOTE_USER: ${{ secrets.AWS_USERNAME }}
         TARGET: 'newsify'
+
     - name: Install dependencies and restart server
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
+        ssh -tt -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
           cd newsify
           pip install -r requirements.txt
-          python3 manage.py runserver
+          pkill -f "manage.py runserver" || true  # Остановка старого сервера
+          nohup python3 manage.py runserver 0.0.0.0:8000 > server.log 2>&1 &
         EOF
