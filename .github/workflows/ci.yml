@@ -18,7 +18,7 @@ jobs:
         SOURCE: "."
         REMOTE_HOST: ${{ secrets.AWS_HOST }}
         REMOTE_USER: ${{ secrets.AWS_USERNAME }}
-        TARGET: '/home/ubuntu/actions-runner/_work/Newsify/'
+        TARGET: 'newsify'
 #    - name: Install dependencies and restart server
 #      run: |
 #        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
