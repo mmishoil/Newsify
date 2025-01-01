@@ -1,44 +1,29 @@
-name: Django CI/CD
+name: Deploy to AWS EC2
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12.8'
-
-    - name: Show Secret (Debug Only)
+    - name: Copy project to AWS EC2
+      uses: easingthemes/ssh-deploy@v2.1.5
       env:
-        AWS_HOST: ${{ secrets.AWS_HOST }}
+        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+        ARGS: "-avz --delete"
+        SOURCE: "."
+        REMOTE_HOST: ${{ secrets.AWS_HOST }}
+        REMOTE_USER: ${{ secrets.AWS_USERNAME }}
+        TARGET: '_work'
+    - name: Install dependencies and restart server
       run: |
-        echo "AWS_HOST is: $AWS_HOST"
-
-    - name: Install Dependencies
-      run: |
-        pip install -r requirements.txt
-
-    - name: Test SSH Connection
-      run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} "echo Connection successful"
-      env:
-        AWS_HOST: ${{ secrets.AWS_HOST }}
-        AWS_USERNAME: ${{ secrets.AWS_USERNAME }}
-
-    - name: Deploy to AWS EC2
-      uses: appleboy/scp-action@master
-      with:
-          host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.AWS_USERNAME }}
-          password: ${{ secrets.DEPLOY_KEY }}
-          port: 22
-          source: "."
-          target: "/Project/"
+        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
+          cd /path/to/your/project
+          source venv/bin/activate
+          pip install -r requirements.txt
+          sudo systemctl restart your-service.service
+        EOF
