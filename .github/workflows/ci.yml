@@ -27,15 +27,11 @@ jobs:
         host: ${{ secrets.AWS_HOST }}
         username: ${{ secrets.AWS_USERNAME }}
         key: ${{ secrets.DEPLOY_KEY }}
-        script: |            
+        script: |
           cd newsify
           python3 -m venv venv            
           source venv/bin/activate
-          pip install -r requirements.txt            
-#          Если у вас есть миграции, добавьте команду для их выполнения
-          python3 manage.py migrate --noinput            
-          # Собираем статические файлы
-          python3 manage.py collectstatic --no-input            
-          # Замените 'your_app.service' на имя вашего systemd сервиса, если вы используете systemd для управления процессом Django
-#          sudo systemctl restart your_app.service
+          pip install -r requirements.txt
+          python3 manage.py migrate --noinput
+          python3 manage.py collectstatic --no-input
           sudo python3 manage.py runserver
