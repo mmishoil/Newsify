@@ -21,12 +21,21 @@ jobs:
         REMOTE_HOST: ${{ secrets.AWS_HOST }}
         REMOTE_USER: ${{ secrets.AWS_USERNAME }}
         TARGET: 'newsify'
-
-    - name: Install dependencies and restart server
-      run: |
-        ssh -tt -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_HOST }} << 'EOF'
+    - name: Install dependencies and start server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_HOST }}
+        username: ${{ secrets.AWS_USERNAME }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |            
           cd newsify
-          pip install -r requirements.txt
-          pkill -f "manage.py runserver" || true  # Остановка старого сервера
-          nohup python3 manage.py runserver 0.0.0.0:8000 > server.log 2>&1 &
-        EOF
+          python3 -m venv venv            
+          source venv/bin/activate
+          pip install -r requirements.txt            
+#          Если у вас есть миграции, добавьте команду для их выполнения
+          python3 manage.py migrate --noinput            
+          # Собираем статические файлы
+          python3 manage.py collectstatic --no-input            
+          # Замените 'your_app.service' на имя вашего systemd сервиса, если вы используете systemd для управления процессом Django
+#          sudo systemctl restart your_app.service
+          sudo python3 manage.py runserver
