@@ -30,6 +30,8 @@ jobs:
           sudo apt update
           sudo apt install -y python3-venv
           cd newsify
+          touch .env
+          echo "${{ secrets.ENV }}" > .env
           python3 -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
