@@ -1,4 +1,4 @@
 /.idea
-/text.txt
+/deploy/readme.md
 .env
 venv/
