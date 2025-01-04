@@ -59,10 +59,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://newsify-nbu.duckdns.org/",
-    "http://newsifynbu.duckdns.org/",
-    "https://newsify-nbu.duckdns.org/",
-    "https://newsifynbu.duckdns.org/",
+    "http://newsify-nbu.duckdns.org",
+    "http://newsifynbu.duckdns.org",
+    "https://newsify-nbu.duckdns.org",
+    "https://newsifynbu.duckdns.org",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -80,6 +80,8 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
