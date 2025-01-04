@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages', # displaying one-time notifications to user
     'django.contrib.staticfiles', # for serving static files
-    'news'
+    'news',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,33 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://newsify-nbu.duckdns.org/",
+    "http://newsifynbu.duckdns.org/",
+    "https://newsify-nbu.duckdns.org/",
+    "https://newsifynbu.duckdns.org/",
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
+
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'Newsify.urls'
 
