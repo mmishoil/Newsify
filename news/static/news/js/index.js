@@ -1,4 +1,4 @@
-console.log("init index.js")
+console.log("init index.js file")
 
 const myFunction = function() {
     document.getElementById("myForm").addEventListener("submit", function(e) {
@@ -58,6 +58,7 @@ const myFunction = function() {
                 }
             }
         }
+        console.log('cookie: '+cookieValue)
         return cookieValue;
     }
 }
