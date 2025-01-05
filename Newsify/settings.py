@@ -59,10 +59,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://newsify-nbu.duckdns.org",
-    "http://newsifynbu.duckdns.org",
+    # "http://newsify-nbu.duckdns.org",
+    # "http://newsifynbu.duckdns.org",
     "https://newsify-nbu.duckdns.org",
-    "https://newsifynbu.duckdns.org",
+    # "https://newsifynbu.duckdns.org",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -98,6 +98,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.csrf',
             ],
         },
     },
