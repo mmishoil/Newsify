@@ -62,6 +62,7 @@ CORS_ALLOWED_ORIGINS = [
     # "http://newsify-nbu.duckdns.org",
     # "http://newsifynbu.duckdns.org",
     "https://newsify-nbu.duckdns.org",
+    "https://newsify-nbu.duckdns.org:8000",
     # "https://newsifynbu.duckdns.org",
 ]
 
