@@ -49,14 +49,14 @@
         </ul>
     </div>
 
-<!--    <div id="countries">-->
-<!--        <ul class = 'list-group'>-->
-<!--            {% for country in countries%}-->
-<!--            <li class='list-group-item'>{{ country.full_name }}</li>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
-<!--    </div>-->
-
+    <div class="form-group">
+        <label for="countries">Select country</label>
+        <select class="form-control" id="countries" name="countries">
+            {% for country in countries %}
+                <option>{{country.full_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
 
     <div id="formResponse"></div>
 
