@@ -36,7 +36,7 @@ def get_main_news():
     )
     return all_articles['articles']
 
-@csrf_exempt
+
 def my_form_submit(request):
     if request.method == 'POST':
         keyword = request.POST.get('keyword')
