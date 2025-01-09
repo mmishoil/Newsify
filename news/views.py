@@ -2,6 +2,7 @@ from newsapi import NewsApiClient
 from django.shortcuts import render
 from django.http import JsonResponse
 from news.models import Country
+from django.views.decorators.csrf import csrf_exempt
 import json
 import redis
 import os
@@ -35,7 +36,7 @@ def get_main_news():
     )
     return all_articles['articles']
 
-
+@csrf_exempt
 def my_form_submit(request):
     if request.method == 'POST':
         keyword = request.POST.get('keyword')
