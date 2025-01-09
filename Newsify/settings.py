@@ -65,20 +65,13 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://newsify-nbu.duckdns.org",
-    #"http://newsifynbu.duckdns.org",
     "https://newsify-nbu.duckdns.org",
-    "https://newsify-nbu.duckdns.org:8000",
-    # "https://newsifynbu.duckdns.org",
 ]
 
 
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
-    "PUT",
-    "PATCH",
-    "DELETE",
-    "OPTIONS",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -87,8 +80,6 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
