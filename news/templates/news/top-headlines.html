@@ -1,0 +1,92 @@
+{% extends 'news/layout.html' %}
+
+{% block page %}
+
+    <h1 class="page__title">Search, <span class="text-primary">Find</span> & Read</h1>
+    <h2 class="page__subtitle">
+      Easily search for the latest news by date and keywords. Stay informed with personalized
+      updates, sorted by popularity, and never miss the stories that matter most.
+    </h2>
+    <div class="search">
+      <form action="" name="searchTopHeadlinesForm" id="search-form" aria-label="Search news" role="search">
+        <div class="search__form form">
+          <div class="form__row">
+            <label for="search-input" class="visually-hidden">Date</label>
+            <svg class="form__addon form__addon_left" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <use href="#icon-edit"></use>
+            </svg>
+            <input
+              class="search__input input input_addon"
+              type="search"
+              name="q"
+              id="search-input"
+              placeholder="Title or keyword"
+              aria-label="Search"
+              list="search-suggestions"
+              autocomplete="off" />
+            <datalist class="search__datalist" id="search-suggestions" role="listbox">
+              <option value="Mac book Pro"></option>
+              <option value="War"></option>
+              <option value="Forest"></option>
+              <option value="Dark time"></option>
+              <option value="Iphone 16 Pro Max"></option>
+            </datalist>
+          </div>
+          <div class="form__row">
+            <svg class="form__addon form__addon_left" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <use href="#icon-map"></use>
+            </svg>
+            <label for="search-country" class="visually-hidden">Country</label>
+            <select class="search__input input input_addon" name="country" id="search-country">
+              <option value="" disabled selected>Select Country</option>
+                {% for country in countries %}
+                  <option>{{country.full_name}}</option>
+                {% endfor %}
+            </select>
+            <button class="button button_icon form__addon form__addon_right" id="button-reset">
+              <svg class="button__icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                <use href="#icon-close"></use>
+              </svg>
+            </button>
+          </div>
+          <button class="button button_sm button_primary" type="submit">Search</button>
+        </div>
+        <span class="search__form-error" id="search-form-error"></span>
+        <div class="search__footer">
+          <label for="all">
+            <input class="custom-radio" type="radio" name="category" id="all" value="all" checked />
+            <span class="label">All</span>
+          </label>
+          <label for="business">
+            <input class="custom-radio" type="radio" name="category" id="business" value="business" />
+            <span class="label">Business</span>
+          </label>
+          <label for="general">
+            <input class="custom-radio" type="radio" name="category" id="general" value="general" />
+            <span class="label">General</span>
+          </label>
+          <label for="health">
+            <input class="custom-radio" type="radio" name="category" id="health" value="health" />
+            <span class="label">Health</span>
+          </label>
+          <label for="technology">
+            <input class="custom-radio" type="radio" name="category" id="technology" value="technology" />
+            <span class="label">Technology</span>
+          </label>
+          <label for="science">
+            <input class="custom-radio" type="radio" name="category" id="science" value="science" />
+            <span class="label">Science</span>
+          </label>
+          <label for="sports">
+            <input class="custom-radio" type="radio" name="category" id="sports" value="sports" />
+            <span class="label">Sports</span>
+          </label>
+        </div>
+      </form>
+    </div>
+    <div class="section section_results" id="results">
+      <div class="gallery gallery_results">
+      </div>
+    </div>
+
+{% endblock %}

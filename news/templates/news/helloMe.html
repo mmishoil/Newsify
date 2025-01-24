@@ -44,7 +44,7 @@
     <div id="initial-news">
         <ul class = 'list-group'>
             {% for article in news%}
-            <li class='list-group-item'>{{ article.title }}</li>
+                <li class='list-group-item'>{{ article }}</li>
             {% endfor %}
         </ul>
     </div>
@@ -60,6 +60,7 @@
 
     <div id="formResponse"></div>
 
+    <button id="myButton" class="btn btn-primary">More</button>
 </div>
 
 
@@ -67,5 +68,89 @@
 
 <script src="{% static 'news/js/index.js' %}"></script>
 <script src="{% static 'news/js/app.js' %}"></script>
+<script>
+    const button = document.getElementById("myButton");
+    button.addEventListener("click", handleClick);
+
+    function handleClick() {
+        const keyword = document.getElementById("keyword").value;
+        const sort = document.getElementById("sort").value;
+        const from = document.getElementById("date-from").value;
+        const to = document.getElementById("date-to").value;
+
+        if ((limit * page) < totalResults) {
+            console.log("Идем на сервер за новостями!");
+
+            page = page + 1
+
+            // Формируем объект данных для отправки на сервер
+            const requestData = {
+                keyword: keyword,
+                sort: sort,
+                from: from,
+                to: to,
+                limit: limit,
+                page: page
+            };
+
+            // Отправляем POST-запрос на сервер
+            fetch('/load-news', {
+                method: 'POST',  // Указываем, что это POST запрос
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify(requestData)  // Преобразуем объект в JSON строку
+            })
+            .then(response => response.json())  // Парсим ответ как JSON
+            .then(data => {
+                // Получаем контейнер для отображения статей
+                const responseContainer = document.getElementById('formResponse');
+
+                // Создаем новый список для статей
+                const list = document.createElement('ul');
+                list.className = 'list-group';
+
+                // Перебираем статьи и добавляем их в список
+                data.articles.forEach(article => {
+                    const item = document.createElement('li');
+                    item.className = 'list-group-item';
+
+                    item.innerHTML = `<strong>${article.title}</strong><br>
+                                      ${article.content}<br>
+                                      <em>${new Date(article.publishedAt).toLocaleString()}</em>`;
+
+                    // Добавляем новый элемент списка
+                    list.appendChild(item);
+                });
+
+                // Добавляем новый список в контейнер, не очищая его
+                responseContainer.appendChild(list);
+            })
+
+            .catch(error => {
+                console.error("Ошибка при получении данных с сервера:", error);
+            });
+        }
+}
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        console.log('cookie: '+cookieValue)
+        return cookieValue;
+    }
+
+</script>
 </body>
 </html>

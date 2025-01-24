@@ -1,0 +1,76 @@
+{% extends 'news/layout.html' %}
+
+{% block page %}
+
+  <h1 class="page__title">Search, <span class="text-primary">Find</span> & Read</h1>
+  <h2 class="page__subtitle">
+    Easily search for the latest news by date and keywords. Stay informed with personalized
+    updates, sorted by popularity, and never miss the stories that matter most.
+  </h2>
+  <div class="search">
+    <form action="" name="searchForm" id="search-form" aria-label="Search news" role="search">
+      <div  class="search__form form">
+        <div class="form__row">
+          <label for="search-input" class="visually-hidden">Title or keyword</label>
+          <svg class="form__addon form__addon_left" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+            <use href="#icon-edit"></use>
+          </svg>
+          <input
+            class="search__input input input_addon"
+            type="search"
+            name="q"
+            id="search-input"
+            placeholder="Title or keyword"
+            aria-label="Search"
+            list="suggestions"
+            autocomplete="off" />
+          <datalist class="search__datalist" id="suggestions" role="listbox">
+            <option value="Mac book Pro"></option>
+            <option value="War"></option>
+            <option value="Forest"></option>
+            <option value="Dark time"></option>
+            <option value="Iphone 16 Pro Max"></option>
+          </datalist>
+        </div>
+        <div class="form__row">
+          <svg class="form__addon form__addon_left" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+            <use href="#icon-datepicker"></use>
+          </svg>
+          <label for="datepicker" class="visually-hidden">Date</label>
+          <input class="search__input input input_addon" type="date" name="date" id="datepicker" placeholder="Date" />
+          <button class="button button_icon form__addon form__addon_right" id="button-reset">
+            <svg class="button__icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <use href="#icon-close"></use>
+            </svg>
+          </button>
+        </div>
+        <button class="button button_sm button_primary" type="submit">Search</button>
+      </div>
+      <span class="search__form-error" id="search-form-error"></span>
+      <div class="search__footer">
+        <label for="all">
+          <input class="custom-radio" type="radio" name="sortBy" id="all" value="publishedAt" checked />
+          <span class="label">All</span>
+        </label>
+        <label for="popular">
+          <input class="custom-radio" type="radio" name="sortBy" id="popular" value="popularity"/>
+          <span class="label">Popular</span>
+        </label>
+        <label for="relevancy">
+          <input class="custom-radio" type="radio" name="sortBy" id="relevancy" value="relevancy"/>
+          <span class="label">Relevancy</span>
+        </label>
+        <label for="newest">
+          <input class="custom-radio" type="radio" name="sortBy" id="newest" value="publishedAt" />
+          <span class="label">Newest</span>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="section section_results" id="results">
+    <div class="gallery gallery_results">
+    </div>
+  </div>
+
+
+{% endblock %}

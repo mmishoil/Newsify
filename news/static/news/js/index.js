@@ -1,5 +1,9 @@
 console.log("init index.js file")
 
+let limit = 0
+let page = 0
+let totalResults = 0
+
 const myFunction = function() {
     document.getElementById("myForm").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -16,6 +20,9 @@ const myFunction = function() {
         })
             .then(response => response.json())
             .then(data => {
+
+                console.log(data)
+
                 if (data.status === 'ok'){
 
                 const responseContainer = document.getElementById('formResponse');
@@ -37,6 +44,11 @@ const myFunction = function() {
                 });
 
                 // Добавление всего списка в контейнер для отображения на странице
+
+                limit = data.limit
+                page = data.page
+                totalResults = data.totalResults
+
                 responseContainer.appendChild(list);
             }
             })
@@ -61,7 +73,8 @@ const myFunction = function() {
         console.log('cookie: '+cookieValue)
         return cookieValue;
     }
+
 }
 
-
 document.addEventListener("DOMContentLoaded", myFunction);
+
