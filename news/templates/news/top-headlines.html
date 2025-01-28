@@ -40,7 +40,7 @@
             <select class="search__input input input_addon" name="country" id="search-country">
               <option value="" disabled selected>Select Country</option>
                 {% for country in countries %}
-                  <option>{{country.full_name}}</option>
+                  <option value="{{ country.short_name }}">{{country.full_name}}</option>
                 {% endfor %}
             </select>
             <button class="button button_icon form__addon form__addon_right" id="button-reset">
@@ -53,17 +53,17 @@
         </div>
         <span class="search__form-error" id="search-form-error"></span>
         <div class="search__footer">
-          <label for="all">
-            <input class="custom-radio" type="radio" name="category" id="all" value="all" checked />
-            <span class="label">All</span>
+          <label for="general">
+            <input class="custom-radio" type="radio" name="category" id="general" value="general" />
+            <span class="label">General</span>
           </label>
           <label for="business">
             <input class="custom-radio" type="radio" name="category" id="business" value="business" />
             <span class="label">Business</span>
           </label>
-          <label for="general">
-            <input class="custom-radio" type="radio" name="category" id="general" value="general" />
-            <span class="label">General</span>
+          <label for="entertainment">
+            <input class="custom-radio" type="radio" name="category" id="entertainment" value="entertainment" />
+            <span class="label">Entertainment</span>
           </label>
           <label for="health">
             <input class="custom-radio" type="radio" name="category" id="health" value="health" />
@@ -85,8 +85,8 @@
       </form>
     </div>
     <div class="section section_results" id="results">
-      <div class="gallery gallery_results">
-      </div>
+      <div class="gallery gallery_results"></div>
+      <div class="section__loader"></div>
     </div>
 
 {% endblock %}

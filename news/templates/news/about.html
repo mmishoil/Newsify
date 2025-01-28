@@ -1,0 +1,114 @@
+{% extends 'news/layout.html' %}
+
+{% block page %}
+
+    <article class="section section_article">
+        <h1 class="page__title">About <span class="text-primary">Newsify</span></h1>
+        <p>
+          The web application is designed to simplify access to up-to-date news. It allows users
+          to find and filter news content within a specified time range. The application
+          provides a quick way to access the most relevant and popular articles based on
+          keywords or topics.
+        </p>
+        <h2 class="section__title">Features</h2>
+        <ul>
+          <li>
+            <strong>Search by date and keywords:</strong> Enables users to specify a time range
+            and optionally add keywords to find relevant news.
+          </li>
+          <li>
+            <strong>Two search modes: </strong>
+            <ul>
+              <li>
+                <strong>Standard search:</strong> Specify a time range and optionally add
+                keywords to find relevant news articles.
+              </li>
+              <li>
+                <strong>Top headlines search:</strong> Browse trending news filtered by
+                keywords, country, or category (e.g., technology, sports, business).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Interactive interface:</strong> Features convenient date input fields with a
+            calendar widget and a responsive design suitable for all devices.
+          </li>
+          <li>
+            <strong>Sorting by popularity: </strong> Helps users quickly find the most popular
+            articles.
+          </li>
+          <li>
+            <strong>Direct access to sources:</strong> Includes links to full versions of
+            articles.
+          </li>
+          <li>
+            <strong>Request caching:</strong> Recently retrieved news articles are stored in a
+            Redis cache to reduce API requests and improve application performance. Cached data
+            ensures faster loading times for frequently accessed content.
+          </li>
+        </ul>
+        <h2 class="section__title">How the Application Works</h2>
+        <ol>
+          <li>
+            Users select either Standard Search (time range and keywords) or Top Headlines
+            Search (keywords, country, and category).
+          </li>
+          <li>
+            The application sends a request to the <a href="https://newsapi.org">News API</a> to
+            retrieve relevant news articles.
+          </li>
+          <li>
+            The data is filtered and sorted by relevance or popularity, depending on the search
+            mode.
+          </li>
+          <li>
+            The results are displayed in a user-friendly format with titles, descriptions, and
+            links.
+          </li>
+        </ol>
+        <h2 class="section__title">Technologies</h2>
+        <h3>Frontend:</h3>
+        <ul>
+          <li>
+            <strong>HTML5, CSS3, JavaScript :</strong> For building a responsive, user-friendly
+            interface and implementing interactivity.
+          </li>
+        </ul>
+        <h3>Backend:</h3>
+        <ul>
+          <li>
+            <strong>Django (Python):</strong> To handle user requests and interact with the API.
+          </li>
+          <li><strong>SQLite:</strong>To store query for country and cache data.</li>
+          <li>
+            <strong>Redis:</strong> For caching API responses and improving application
+            performance.
+          </li>
+        </ul>
+        <h3>Integration:</h3>
+        <ul>
+          <li>
+            <strong><a href="https://newsapi.org">News API</a>:</strong> To fetch up-to-date
+            information.
+          </li>
+        </ul>
+        <h3>Hosting and Deployment:</h3>
+        <ul>
+          <li>
+            <strong>AWS (Amazon Web Services):</strong> To host and ensure the stable operation
+            of the application.
+          </li>
+          <li>
+            <strong>Gunicorn and Nginx:</strong> For request handling and server management.
+          </li>
+        </ul>
+        <h2 class="section__title">Advantages</h2>
+        <ul>
+          <li>Intuitive interface for seamless interaction with the application.</li>
+          <li>Two powerful search modes to cover different user needs.</li>
+          <li>Quick access to relevant news thanks to integration with modern APIs.</li>
+          <li>Reliable architecture built using proven technologies.</li>
+        </ul>
+    </article>
+
+{% endblock %}
