@@ -88,13 +88,13 @@
         <!--   стили и скрипты для индекса   -->
         <link rel="stylesheet" crossorigin href="{% static 'news/assets/index-CksuuEqD.css' %}">
         <link rel="stylesheet" crossorigin href="{% static 'news/assets/main-Bdjp7Hvu.css' %}">
-        <script type="module" crossorigin src="{% static 'news/assets/main-25gfnTxm.js' %}"></script>
+        <script type="module" crossorigin src="{% static 'news/assets/main-D0thGDbi.js' %}"></script>
 
         {% if request.resolver_match.url_name == "main_page" %}
-        <script type="module" crossorigin src="{% static 'news/assets/index-EjlRxYi8.js' %}"></script>
+        <script type="module" crossorigin src="{% static 'news/assets/index-BL5ZZB_v.js' %}"></script>
         {% elif request.resolver_match.url_name == "headlines_page" %}
         <!--    скрипт для хедлайнс    -->
-        <script type="module" crossorigin src="{% static 'news/assets/headlines-BVzGpp_e.js' %}"></script>
+        <script type="module" crossorigin src="{% static 'news/assets/headlines-C8hDDo0b.js' %}"></script>
         {% endif %}
     </head>
     <body>
@@ -104,7 +104,9 @@
                 <div class="container">
                     {% block page %}
                     {% endblock %}
-                    {% include 'news/latestNews.html'%}
+                    {% if not request.resolver_match.url_name == "about_page" %}
+                        {% include 'news/latestNews.html'%}
+                    {% endif %}
                 </div>
             </section>
             {% include 'news/footer.html'%}
