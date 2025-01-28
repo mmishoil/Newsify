@@ -1,10 +1,7 @@
-from traceback import print_tb
-
 from newsapi import NewsApiClient
 from django.shortcuts import render
 from django.http import JsonResponse
 from news.models import Country
-from django.views.decorators.csrf import csrf_exempt
 import json
 import redis
 import os
@@ -121,33 +118,12 @@ def my_form_submit_headlines(request):
         if(len(all_articles['articles']) == 0):
             all_articles['terminate'] = True
 
-        #all_articles = filterNews(all_articles)
+        all_articles = filterNews(all_articles)
         all_articles['page'] = page
         all_articles['limit'] = limit
 
         return JsonResponse(all_articles, status=200)
     return JsonResponse({'error': 'Не удалось отправить форму.'}, status=400)
-
-# def load_news(request):
-#     if request.method == "POST":
-#         # Получаем данные из тела запроса
-#         data = json.loads(request.body)
-#
-#         keyword = data.get('keyword', '')
-#         sort = data.get('sort', 'publishedAt')
-#         date_from = data.get('from', '')
-#         date_to = data.get('to', '')
-#         page = data.get('page', 1)
-#
-#         print(keyword)
-#         print(sort)
-#         print(date_from)
-#         print(date_to)
-#         print(page)
-#
-#         news_data = getEverything(keyword, date_from, date_to, sort, page)
-#         # Возвращаем JSON-ответ
-#         return JsonResponse(news_data, status=200)
 
 def frontTestHeadlines(request):
     countries = Country.objects.all()
