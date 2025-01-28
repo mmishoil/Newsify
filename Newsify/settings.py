@@ -63,9 +63,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://www.newsify-nbu.duckdns.org',
 ]
 
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-
 CORS_ALLOWED_ORIGINS = [
     "http://newsify-nbu.duckdns.org",
     "https://newsify-nbu.duckdns.org",
