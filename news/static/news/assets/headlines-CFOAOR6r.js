@@ -1,1 +1,0 @@
-import"./main-CXHu7XYC.js";document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("button-reset"),t=document.getElementById("search-country");e&&(e.style.display="none",t.addEventListener("change",()=>{t.value&&(e.style.display="block")}),e.addEventListener("click",n=>{n.preventDefault(),t.value="",e.style.display="none"}))});
