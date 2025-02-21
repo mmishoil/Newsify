@@ -2,12 +2,16 @@ from newsapi import NewsApiClient
 from django.shortcuts import render
 from django.http import JsonResponse
 from news.models import Country
+from django.middleware.csrf import get_token
 import json
 import redis
 import os
 
 trustedSources = 'bbc-news,cnn,the-new-york-times,the-guardian-uk,reuters,associated-press,bloomberg,cnbc,financial-times,the-wall-street-journal,forbes,techcrunch,the-verge,wired,ars-technica,engadget,national-geographic,scientific-american,new-scientist,espn,bbc-sport,fox-sports,nfl-news,entertainment-weekly,mtv-news,buzzfeed,medical-news-today,healthline'
 limit = 10
+
+def get_csrf_token(request):
+    return JsonResponse({"csrfToken": get_token(request)})
 
 def connect2API():
     key = os.getenv('API_KEY')
